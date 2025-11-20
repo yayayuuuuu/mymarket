@@ -23,10 +23,7 @@ export default function TimelinePast({ timelineData, scrollContainerRef }) {
             <div className="relative z-10 text-white">
               <h2 className="text-pink-400 text-3xl font-bold">{item.year}</h2>
               <h3 className="text-xl mt-1 font-semibold">{item.title}</h3>
-              <p
-                className="text-sm mt-2 leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: item.desc }}
-              ></p>
+              <p className="text-sm mt-2 leading-relaxed" dangerouslySetInnerHTML={{ __html: item.desc }} />
             </div>
           </motion.div>
         ))}
@@ -34,5 +31,3 @@ export default function TimelinePast({ timelineData, scrollContainerRef }) {
     </div>
   );
 }
-
-

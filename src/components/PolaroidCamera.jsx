@@ -1,4 +1,4 @@
-import Countdown from "./Countdown"; 
+import Countdown from "./Countdown"; // 導入倒數元件
 import { useRef, useState } from "react";
 import Webcam from "react-webcam";
 import html2canvas from "html2canvas";
@@ -11,24 +11,24 @@ export default function PolaroidCamera({ labelText = "南門市場 到此一遊"
   const framePadding = 18;
   const bottomBand = Math.round(canvasHeight * 0.18);
 
-  // 拍照截圖（直接截取整個拍立得）
   const capture = async () => {
     const polaroid = document.getElementById("polaroidFrame");
     if (!polaroid) return;
 
-    // html2canvas 直接截整個拍立得包含白邊
     const canvas = await html2canvas(polaroid, { useCORS: true, scale: 2 });
     setPhotoSrc(canvas.toDataURL("image/png"));
   };
 
-  const startCountdownAndCapture = () => setShowCountdown(true);
+  const startCountdownAndCapture = () => {
+    setShowCountdown(true);
+  };
+
   const handleCountdownComplete = () => {
     setShowCountdown(false);
     capture();
   };
 
   const retake = () => setPhotoSrc(null);
-
   const downloadPolaroid = () => {
     if (!photoSrc) return;
     const link = document.createElement("a");
@@ -49,12 +49,11 @@ export default function PolaroidCamera({ labelText = "南門市場 到此一遊"
         </h2>
       </div>
 
-      {/* 拍立得框 */}
       <div id="polaroidFrame" className="relative bg-white rounded-xl shadow-2xl flex flex-col items-center justify-start overflow-hidden" style={{ width: canvasWidth / 3 + "px", height: canvasHeight / 3 + "px", padding: framePadding / 3 + "px" }}>
         {!photoSrc ? (
-          <Webcam ref={webcamRef} audio={false} screenshotFormat="image/png" className="w-full h-full object-contain" videoConstraints={{ facingMode: "user", aspectRatio: canvasWidth / canvasHeight }} />
+          <Webcam ref={webcamRef} audio={false} screenshotFormat="image/png" className="w-full h-full object-cover" videoConstraints={{ facingMode: "user", aspectRatio: canvasWidth / canvasHeight }} />
         ) : (
-          <img src={photoSrc} alt="polaroid" className="w-full h-full object-contain" />
+          <img src={photoSrc} alt="polaroid" className="w-full h-full object-cover" />
         )}
 
         {/* 拍立得底部白邊 */}
@@ -72,17 +71,22 @@ export default function PolaroidCamera({ labelText = "南門市場 到此一遊"
       {/* 拍照 / 重拍 / 下載 按鈕 */}
       <div className="flex gap-4 mt-6 z-10">
         {!photoSrc ? (
-          <button onClick={startCountdownAndCapture} className="px-6 py-2 rounded-xl bg-emerald-600 text-black">📷 拍照</button>
+          <button onClick={startCountdownAndCapture} className="px-6 py-2 rounded-xl bg-emerald-600 text-black">
+            📷 拍照
+          </button>
         ) : (
           <>
-            <button onClick={retake} className="px-4 py-2 rounded-lg bg-gray-300">重拍</button>
-            <button onClick={downloadPolaroid} className="px-4 py-2 rounded-lg bg-emerald-600 text-black">下載</button>
+            <button onClick={retake} className="px-4 py-2 rounded-lg bg-gray-300">
+              重拍
+            </button>
+            <button onClick={downloadPolaroid} className="px-4 py-2 rounded-lg bg-emerald-600 text-black">
+              下載
+            </button>
           </>
         )}
       </div>
     </div>
   );
 }
-
 
 

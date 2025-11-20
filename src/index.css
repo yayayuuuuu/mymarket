@@ -1,0 +1,324 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: 'Noto Sans TC', 'ZCOOL QingKe HuangYou', sans-serif;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+/* index.css 或 Home.css */
+@keyframes slideDown {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.flowing-line {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background: white;
+  opacity: 0.2;
+  animation-name: slideDown;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+/* 霓虹亮暗閃爍 */
+/* 霓虹閃爍 + 上下跳動 */
+@keyframes neonBlink {
+  0% {
+    opacity: 0.4;
+    text-shadow: 0 0 2px #fff, 0 0 4px #0ff, 0 0 6px #0ff;
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 4px #fff, 0 0 8px #0ff, 0 0 12px #0ff, 0 0 16px #0ff;
+  }
+}
+
+@keyframes swipeHint {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-4px); }
+}
+
+.neon-text {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+text-align: center;
+
+  white-space: nowrap;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 1px;
+  font-size: clamp(16px, 3vw, 28px);
+  animation: neonBlink 1.6s ease-in-out infinite alternate,
+             swipeHint 1.2s ease-in-out infinite;
+  pointer-events: none;
+}
+/* ===== 霓虹科技感按鈕通用樣式 ===== */
+.neon-btn {
+  position: relative;
+  border: 1px solid #3deaff;
+  border-radius: 0.6rem;
+  padding: 6px 12px;
+  color: white;
+  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.45);
+  transition: 0.25s ease;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+
+.neon-btn:hover {
+  box-shadow: 0 0 8px #3deaff, 0 0 16px #3deaff;
+  transform: scale(1.07);
+}
+
+.neon-btn.active {
+  background: rgba(0, 200, 255, 0.2);
+  box-shadow: 0 0 10px #3deaff, 0 0 20px #3deaff;
+  border-color: #72f5ff;
+  transform: scale(1.07);
+}
+
+.neon-red {
+  border-color: #ff6b6b;
+}
+.neon-red:hover {
+  box-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff6b6b;
+}
+
+.neon-green {
+  border-color: #66ff9f;
+}
+.neon-green:hover {
+  box-shadow: 0 0 10px #66ff9f, 0 0 20px #66ff9f;
+}
+.color-picker {
+  width: 42px;
+  height: 42px;
+  border: 2px solid #3deaff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #3deaff;
+  cursor: pointer;
+}
+
+.neon-black-btn {
+  position: relative;
+  padding: 12px 28px;
+  border-radius: 0.75rem;
+
+  background: #000;            /* 黑色底 */
+  color: #7eefff;              /* 青藍科技字色 */
+  font-weight: 600;
+  border: 1px solid #37e5ff;   /* 青藍外框 */
+  cursor: pointer;
+
+  transition: 0.25s ease;
+  
+  /* 基礎外光暈 */
+  box-shadow: 0 0 10px #22d3ee55;
+}
+
+/* 滑過去：光更強、變更亮 */
+.neon-black-btn:hover {
+  box-shadow: 
+    0 0 12px #22d3ee,
+    0 0 25px #22d3eeaa,
+    0 0 40px #22d3ee55;
+  transform: scale(1.06);
+}
+
+/* 點擊：科技縮小 */
+.neon-black-btn:active {
+  transform: scale(0.95);
+}
+
+/* 標題掉落到中間 */
+/* 標題慢慢掉下到中間 */
+@keyframes dropInSmooth {
+  0% {
+    opacity: 0;
+    transform: translateY(-100vh); /* 從螢幕最上方 */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* 停在中間 */
+  }
+}
+
+.animate-dropInSmooth {
+  animation-name: dropInSmooth;
+  animation-duration: 1.5s; /* 動畫時間，可調整快慢 */
+  animation-timing-function: ease-out; /* 從快到慢，平滑落下 */
+  animation-fill-mode: forwards; /* 保持最終狀態 */
+}
+
+
+
+
+
+
+/* 過程用慢縮放背景（現在宇宙拼貼） */
+@keyframes slowZoom {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.animate-slowZoom {
+  animation: slowZoom 10s ease-in-out infinite;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fadeIn { animation: fadeIn 1s ease-out forwards; }
+.animate-fadeIn.delay-500 { animation-delay: 0.5s; }
+.animate-fadeIn.delay-700 { animation-delay: 0.7s; }
+
+@keyframes float {
+  0% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(-10px) ;opacity: 0.8; }
+  100% { transform: translateY(0); opacity: 0.5; }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+
+
+/* 淡入 */
+/* 只做淡入，不動 transform */
+@keyframes fadeInOnly {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fadeInOnly {
+  animation: fadeInOnly 1.5s ease-out forwards;
+  animation-delay: 0.7s; /* 可以自己調整延遲 */
+}
+
+/* 持續上下浮動 */
+@keyframes floatY {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+.animate-floatY {
+  animation: floatY 6s ease-in-out infinite;
+}
+
+
+
+
+
+
+
+
+
+/* 📱 手機以上（≥ 480px） */
+@media (min-width: 480px) {
+  .neon-text {
+    font-size: 24px;
+  }
+}
+
+/* 📟 平板（≥ 768px） */
+@media (min-width: 768px) {
+  .neon-text {
+    font-size: 16px;
+  }
+}
+
+/* 🖥️ 電腦（≥ 1024px） */
+@media (min-width: 1024px) {
+  .neon-text {
+    font-size: 18px;
+  }
+}
+
+@keyframes neonBlink {
+  0% {
+    opacity: 0.4;
+    text-shadow:
+      0 0 2px #fff,
+      0 0 4px #0ff,
+      0 0 6px #0ff;
+  }
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 4px #fff,
+      0 0 8px #0ff,
+      0 0 12px #0ff,
+      0 0 16px #0ff;
+  }
+}
+
+
+
+

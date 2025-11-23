@@ -60,7 +60,7 @@ export default function FutureUniverse() {
         </div>
 
         {/* 底部固定按鈕 */}
-        <div className="absolute bottom-6 w-full flex justify-center z-50 mb-5">
+        <div className="absolute bottom-6 w-full flex justify-center z-50 mb-3">
          <button onClick={() => navigate("/gallery")} className="neon-black-btn">
   🎨 前往展示牆
 </button>

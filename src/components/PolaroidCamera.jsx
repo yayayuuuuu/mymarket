@@ -98,7 +98,7 @@ export default function PolaroidCamera({ labelText = "南門市場 到此一遊"
         ) : (
           <>
             <button onClick={retake} className="px-4 py-2 rounded-lg bg-gray-300">重拍</button>
-            <button onClick={downloadPolaroid} className="px-4 py-2 rounded-lg bg-emerald-600 text-black">下載</button>
+            <button onClick={downloadPolaroid} className="px-4 py-2 rounded-lg bg-gray-300 text-black">下載</button>
           </>
         )}
       </div>

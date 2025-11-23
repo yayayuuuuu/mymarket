@@ -165,69 +165,85 @@ export default function InfiniteCanvasMobile() {
     }
   };
 
-  return (
-    <div className="relative w-full h-screen bg-black/5 overflow-hidden touch-none select-none p-4">
-      {/* 工具列 */}
-      <div className="flex flex-wrap gap-2 mb-4 md:justify-center">
-        <button
-  onClick={() => setTool("pen")}
-  className={`neon-btn ${tool === "pen" ? "active" : ""}`}
->
-  ✏️ 筆刷
-</button>
+ return (
+  <div className="relative w-full h-screen bg-black/5 overflow-hidden touch-none select-none p-4">
 
-        <button
-  onClick={() => setTool("eraser")}
-  className={`neon-btn ${tool === "eraser" ? "active" : ""}`}
->
-  🧽 橡皮擦
-</button>
+    {/* 工具列 */}
+    <div className="flex flex-wrap gap-2 mb-4 md:justify-center">
+      <button
+        onClick={() => setTool("pen")}
+        className={`neon-btn ${tool === "pen" ? "active" : ""}`}
+      >
+        ✏️ 筆刷
+      </button>
 
-        <input
-  type="color"
-  className="color-picker"
-  value={color}
-  onChange={(e) => setColor(e.target.value)}
-/>
+      <button
+        onClick={() => setTool("eraser")}
+        className={`neon-btn ${tool === "eraser" ? "active" : ""}`}
+      >
+        🧽 橡皮擦
+      </button>
 
-        <input
-          type="range"
-          min="1"
-          max="30"
-          value={lineWidth}
-          onChange={(e) => setLineWidth(Number(e.target.value))}
-          className="w-28"
-        />
+      <input
+        type="color"
+        className="color-picker"
+        value={color}
+        onChange={(e) => setColor(e.target.value)}
+      />
 
-       <button className="neon-btn neon-red" onClick={clearCanvas}>
-  🗑 清空
-</button>
-
-
-        <button className="neon-btn neon-green" onClick={uploadWhiteboard}>
-  📤 上傳
-</button>
-      </div>
-
-       <div className="w-full h-[calc(100%-70px)] flex justify-center items-center overflow-hidden mt-5">
-    <canvas
-      ref={canvasRef}
-      style={{
-        background: "white",
-        border: "1px solid #ccc",
-        touchAction: "none",
-        ...canvasStyleTransform,
-      }}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
-      onContextMenu={(e) => e.preventDefault()}
-    />
-  
-      </div>
+      <input
+        type="range"
+        min="1"
+        max="30"
+        value={lineWidth}
+        onChange={(e) => setLineWidth(Number(e.target.value))}
+        className="w-28"
+      />
     </div>
-  );
+
+    {/* 畫布置中單獨一行 */}
+    <div className="w-full flex justify-center items-center overflow-hidden">
+      <canvas
+        ref={canvasRef}
+        style={{
+          background: "white",
+          border: "1px solid #ccc",
+          touchAction: "none",
+          ...canvasStyleTransform,
+        }}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        onContextMenu={(e) => e.preventDefault()}
+      />
+    </div>
+
+    {/* 按鈕放在畫布下面 */}
+   {/* 按鈕放在畫布下面 */}
+<div className="mt-4 w-full flex flex-col items-center">
+
+  {/* 按鈕 Row */}
+  <div className="flex gap-4">
+    <button className="neon-btn neon-red" onClick={clearCanvas}>
+      🗑 清空
+    </button>
+
+    <button className="neon-btn neon-green" onClick={uploadWhiteboard}>
+      📤 上傳
+    </button>
+  </div>
+
+  {/* 提示文字（一定在按鈕下方） */}
+  <p className="mt-3 text-center text-sm text-gray-600">
+    ✨ 畫完記得按下「上傳」喔！
+  </p>
+</div>
+
+
+  </div>
+);
+
 }
 
 

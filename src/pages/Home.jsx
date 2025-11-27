@@ -14,16 +14,16 @@ export default function Home() {
 
   const sections = [
     {
-      title: "過去宇宙",
-      description: "穿越到古早味的南門市場",
+      title: "前人固著紀錄",
+      description: "殘存於時空裂縫中的歷史碎片",
       color: "from-yellow-300 to-orange-400",
       link: "/past",
       type: "past",
       images: ["/images/past1.jpg", "/images/past2.jpg", "/images/past3.jpg"],
     },
     {
-      title: "現在宇宙",
-      description: "探索現在熱鬧的市場時光",
+      title: "實地影像校準",
+      description: "採集固著影像新增時空錨定度",
       color: "from-green-300 to-emerald-500",
       link: "/present",
       type: "present",
@@ -35,8 +35,8 @@ export default function Home() {
       ],
     },
     {
-      title: "未來宇宙",
-      description: "想像科技與人文交織的未來市集",
+      title: "未來錨點創造",
+      description: "時空維度發展與未來藍圖繪製",
       color: "from-blue-400 to-purple-600",
       link: "/future",
       type: "falling",

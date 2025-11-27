@@ -94,7 +94,7 @@ export default function PolaroidCamera({ labelText = "南門市場 到此一遊"
 
       <div className="flex gap-4 mt-6 z-10">
         {!photoSrc ? (
-          <button onClick={startCountdownAndCapture} className="px-6 py-2 rounded-xl bg-emerald-600 text-black">📷 拍照</button>
+          <button onClick={startCountdownAndCapture} className="px-6 py-2 rounded-xl bg-emerald-600 text-black">採集固著影像</button>
         ) : (
           <>
             <button onClick={retake} className="px-4 py-2 rounded-lg bg-gray-300">重拍</button>

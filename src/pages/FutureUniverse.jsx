@@ -46,7 +46,7 @@ export default function FutureUniverse() {
         <div className="w-full  text-white px-4 py-3 flex items-center justify-center  z-40">
           <div className="flex flex-col gap-1 text-center">
             <h1 className="text-4xl font-bold tracking-wider drop-shadow-lg">
-              ✦ 未來宇宙 ✦
+              ✦ 未來錨點創造 ✦
             </h1>
             <p className="text-sm text-gray-300">
               發揮創意畫下未來10年、20年後的南門市場
@@ -62,7 +62,7 @@ export default function FutureUniverse() {
         {/* 底部固定按鈕 */}
         <div className="absolute bottom-6 w-full flex justify-center z-50 mb-3">
          <button onClick={() => navigate("/gallery")} className="neon-black-btn">
-  🎨 前往展示牆
+   前往時空維度走廊
 </button>
 
         </div>

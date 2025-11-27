@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 export default function IntroModal({ visible, onClose }) {
-  const fullText = `現在的南門市場，在新建築裡延續著熟悉的熱鬧與香味。
-攤商的招呼、人潮的步伐，都讓這裡依舊溫暖。
-現在，也換你來探索，用你的視角拍下這一刻的南門市場。`;
+  const fullText = `為了維護南門市場在時空裂縫中的穩定度，請您實地踏查並留下影像錨點，增加南門市場的固著度吧！`;
 
   const [displayText, setDisplayText] = useState("");
   const [finished, setFinished] = useState(false);
@@ -94,7 +92,7 @@ export default function IntroModal({ visible, onClose }) {
             onClick={onClose}
             className="mt-4 px-8 py-3 bg-[rgba(250,250,250,1)] text-gray-800 rounded-full border border-gray-300 hover:bg-[rgba(245,245,245,1)] transition-all duration-300 shadow-sm font-medium"
           >
-            開始探索
+            開市採集固著影像
           </button>
         )}
       </div>

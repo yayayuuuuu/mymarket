@@ -92,7 +92,7 @@ export default function IntroModal({ visible, onClose }) {
             onClick={onClose}
             className="mt-4 px-8 py-3 bg-[rgba(250,250,250,1)] text-gray-800 rounded-full border border-gray-300 hover:bg-[rgba(245,245,245,1)] transition-all duration-300 shadow-sm font-medium"
           >
-            開市採集固著影像
+            開始採集固著影像
           </button>
         )}
       </div>

@@ -2,17 +2,19 @@ import Countdown from "./Countdown";
 import { useRef, useState, useEffect } from "react";
 import Webcam from "react-webcam";
 import html2canvas from "html2canvas";
+import MagicToast from "./MagicToast";
 
 export default function PolaroidCamera({ labelText = "南門市場 記憶錨點", canvasWidth = 900, canvasHeight = 1100 }) {
   const webcamRef = useRef(null);
   const [photoSrc, setPhotoSrc] = useState(null);
   const [showCountdown, setShowCountdown] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
+
   const [videoConstraints, setVideoConstraints] = useState({ facingMode: "user" });
 
   const framePadding = 18;
   const bottomBand = Math.round(canvasHeight * 0.18);
 
-  // 取得前鏡頭比例
   useEffect(() => {
     async function getVideoStream() {
       try {
@@ -24,9 +26,9 @@ export default function PolaroidCamera({ labelText = "南門市場 記憶錨點"
           width: settings.width,
           height: settings.height
         });
-        track.stop(); // 先關掉 track
+        track.stop();
       } catch (err) {
-        console.warn("無法取得前鏡頭設定，使用預設", err);
+        console.warn("無法取得前鏡頭設定：", err);
       }
     }
     getVideoStream();
@@ -39,19 +41,17 @@ export default function PolaroidCamera({ labelText = "南門市場 記憶錨點"
     setPhotoSrc(canvas.toDataURL("image/png"));
   };
 
-  const startCountdownAndCapture = () => setShowCountdown(true);
-  const handleCountdownComplete = () => {
-    setShowCountdown(false);
-    capture();
-  };
-  const retake = () => setPhotoSrc(null);
-
-  const downloadPolaroid = () => {
+  const handleDownload = () => {
     if (!photoSrc) return;
+
     const link = document.createElement("a");
     link.href = photoSrc;
     link.download = "nanmen-polaroid.png";
     link.click();
+
+    // 顯示魔法提示
+    setToastVisible(true);
+    setTimeout(() => setToastVisible(false), 2800);
   };
 
   return (
@@ -66,8 +66,16 @@ export default function PolaroidCamera({ labelText = "南門市場 記憶錨點"
       </div>
 
       {/* 拍立得框 */}
-      <div id="polaroidFrame" className="relative bg-white rounded-xl shadow-2xl flex flex-col items-center justify-start overflow-hidden" style={{ width: canvasWidth / 3 + "px", height: canvasHeight / 3 + "px", padding: framePadding / 3 + "px" }}>
-        <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+      <div
+        id="polaroidFrame"
+        className="relative bg-white rounded-xl shadow-2xl flex flex-col items-center justify-start overflow-hidden"
+        style={{
+          width: canvasWidth / 3 + "px",
+          height: canvasHeight / 3 + "px",
+          padding: framePadding / 3 + "px"
+        }}
+      >
+        <div className="flex items-center justify-center w-full h-full overflow-hidden">
           {!photoSrc ? (
             <Webcam
               ref={webcamRef}
@@ -77,33 +85,52 @@ export default function PolaroidCamera({ labelText = "南門市場 記憶錨點"
               className="max-w-full max-h-full object-contain"
             />
           ) : (
-            <img src={photoSrc} alt="polaroid" className="max-w-full max-h-full object-contain" />
+            <img src={photoSrc} className="max-w-full max-h-full object-contain" />
           )}
         </div>
 
-        {/* 拍立得底部白邊 */}
-        <div className="absolute bottom-0 left-0 w-full bg-white flex items-center justify-center" style={{ height: bottomBand / 3 + "px", fontFamily: '"ZCOOL QingKe HuangYou", "Noto Sans TC", sans-serif', fontSize: (bottomBand * 0.28) / 3 + "px", fontWeight: 900, color: "#444" }}>
+        <div
+          className="absolute bottom-0 left-0 w-full bg-white flex items-center justify-center"
+          style={{
+            height: bottomBand / 3 + "px",
+            fontFamily: '"ZCOOL QingKe HuangYou", "Noto Sans TC", sans-serif',
+            fontSize: (bottomBand * 0.28) / 3 + "px",
+            fontWeight: 900,
+            color: "#444"
+          }}
+        >
           {labelText}
         </div>
 
-        {/* Logo */}
-        <img src="/images/marketlogo.png" alt="logo" className="absolute" style={{ width: (bottomBand * 0.6) / 3 + "px", height: (bottomBand * 0.6) / 3 + "px", bottom: "10px", right: "10px" }} />
+        <img
+          src="/images/marketlogo.png"
+          className="absolute"
+          style={{
+            width: (bottomBand * 0.6) / 3 + "px",
+            bottom: "10px",
+            right: "10px"
+          }}
+        />
       </div>
 
-      {showCountdown && <Countdown start={3} onComplete={handleCountdownComplete} />}
+      {showCountdown && <Countdown start={3} onComplete={() => { setShowCountdown(false); capture(); }} />}
 
       <div className="flex gap-4 mt-6 z-10">
         {!photoSrc ? (
-          <button onClick={startCountdownAndCapture} className="px-6 py-2 rounded-xl bg-emerald-600 text-black">開始擷取固著影像</button>
+          <button onClick={() => setShowCountdown(true)} className="px-4 py-2 rounded-lg bg-gray-100">開始擷取固著影像</button>
         ) : (
           <>
-            <button onClick={retake} className="px-4 py-2 rounded-lg bg-gray-300">重拍</button>
-            <button onClick={downloadPolaroid} className="px-4 py-2 rounded-lg bg-gray-300 text-black">下載</button>
+            <button onClick={() => setPhotoSrc(null)} className="px-4 py-2 rounded-lg bg-gray-100">重拍</button>
+            <button onClick={handleDownload} className="px-4 py-2 rounded-lg bg-gray-100">下載</button>
           </>
         )}
       </div>
+
+      {/* 魔法提示 */}
+      <MagicToast message="✨ 恭喜，時空固著程度+1！" visible={toastVisible} />
     </div>
   );
 }
+
 
 

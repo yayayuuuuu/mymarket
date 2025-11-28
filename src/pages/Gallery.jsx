@@ -55,7 +55,7 @@ export default function Gallery() {
       {/* 標題 */}
       <div className="p-4 pb-2 mt-10">
         <h1 className="text-2xl font-bold text-center text-gray-100">
-          未來的南門市場
+          時空維度走廊
         </h1>
       </div>
 

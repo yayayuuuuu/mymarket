@@ -14,7 +14,7 @@ export default function Home() {
 
   const sections = [
     {
-      title: "前人固著紀錄",
+      title: "前人固著紀述",
       description: "殘存於時空裂縫中的歷史碎片",
       color: "from-yellow-300 to-orange-400",
       link: "/past",
@@ -22,7 +22,7 @@ export default function Home() {
       images: ["/images/past1.jpg", "/images/past2.jpg", "/images/past3.jpg"],
     },
     {
-      title: "實地影像校準",
+      title: "實地影像擷取",
       description: "採集固著影像新增時空錨定度",
       color: "from-green-300 to-emerald-500",
       link: "/present",
@@ -36,7 +36,7 @@ export default function Home() {
     },
     {
       title: "未來錨點創造",
-      description: "時空維度發展與未來藍圖繪製",
+      description: "時空維度發展與未來藍圖構築",
       color: "from-blue-400 to-purple-600",
       link: "/future",
       type: "falling",

@@ -47,9 +47,9 @@ export default function IntroPage({ onEnter }) {
       <div className="w-screen flex-1 flex items-center justify-center z-20">
         <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-widest drop-shadow-lg animate-dropInSmooth">
           <br />
-          穿梭南門市場的
+          記憶錨點
           <br />
-          時光之旅
+          南門市場固著計畫
         </h1>
       </div>
 

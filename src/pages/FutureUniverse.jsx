@@ -49,7 +49,7 @@ export default function FutureUniverse() {
               ✦ 未來錨點創造 ✦
             </h1>
             <p className="text-sm text-gray-300">
-              發揮創意畫下未來10年、20年後的南門市場
+              請留下屬於您的時空足跡，成為南門市場新的記憶錨點
             </p>
           </div>
         </div>

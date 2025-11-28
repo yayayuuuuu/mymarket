@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import Webcam from "react-webcam";
 import html2canvas from "html2canvas";
 
-export default function PolaroidCamera({ labelText = "南門市場 到此一遊", canvasWidth = 900, canvasHeight = 1100 }) {
+export default function PolaroidCamera({ labelText = "南門市場 記憶錨點", canvasWidth = 900, canvasHeight = 1100 }) {
   const webcamRef = useRef(null);
   const [photoSrc, setPhotoSrc] = useState(null);
   const [showCountdown, setShowCountdown] = useState(false);
@@ -61,7 +61,7 @@ export default function PolaroidCamera({ labelText = "南門市場 到此一遊"
       <div className="relative z-10 text-center mb-6">
         <h2 className="text-2xl font-bold text-white">
           南門市場的現在，就在眼前。<br />
-          拿起拍立得，記錄屬於你的瞬間！
+          拿起拍立得，擷取屬於你的瞬間！
         </h2>
       </div>
 
@@ -94,7 +94,7 @@ export default function PolaroidCamera({ labelText = "南門市場 到此一遊"
 
       <div className="flex gap-4 mt-6 z-10">
         {!photoSrc ? (
-          <button onClick={startCountdownAndCapture} className="px-6 py-2 rounded-xl bg-emerald-600 text-black">採集固著影像</button>
+          <button onClick={startCountdownAndCapture} className="px-6 py-2 rounded-xl bg-emerald-600 text-black">開始擷取固著影像</button>
         ) : (
           <>
             <button onClick={retake} className="px-4 py-2 rounded-lg bg-gray-300">重拍</button>

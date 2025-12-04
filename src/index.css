@@ -32,13 +32,13 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  font-family: 'Noto Sans TC', 'ZCOOL QingKe HuangYou', sans-serif;
+  /* font-family: 'Noto Sans TC', 'ZCOOL QingKe HuangYou', sans-serif; */
 }
 
-h1 {
+/* h1 {
   font-size: 3.2em;
   line-height: 1.1;
-}
+} */
 
 button {
   border-radius: 8px;
@@ -105,6 +105,22 @@ button:focus-visible {
   50% { transform: translateX(-50%) translateY(-4px); }
 }
 
+
+.text-outline {
+  text-shadow:
+    0 0 6px rgba(0,0,0,0.9),
+    0 0 12px rgba(0,0,0,0.7),
+    0 0 18px rgba(0,0,0,0.5);
+}
+.text-outline-white {
+  text-shadow:
+    0 0 6px rgba(255,255,255,0.8),
+    0 0 12px rgba(255,255,255,0.6),
+    0 0 18px rgba(255,255,255,0.4);
+}
+
+
+
 .neon-text {
   position: absolute;
   bottom: 24px;
@@ -113,7 +129,7 @@ button:focus-visible {
 text-align: center;
 
   white-space: nowrap;
-  color: rgba(255,255,255,0.9);
+   color: rgba(253, 253, 253, 0.9);
   letter-spacing: 1px;
   font-size: clamp(16px, 3vw, 28px);
   animation: neonBlink 1.6s ease-in-out infinite alternate,

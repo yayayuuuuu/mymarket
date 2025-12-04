@@ -47,13 +47,12 @@ export default function Home() {
   const handleClick = (link) => {
     setTransitioning(true);
 
-    // 播放音效
     if (audioRef.current) {
       audioRef.current.currentTime = 0;
       audioRef.current.play().catch((err) => console.log(err));
     }
 
-    setTimeout(() => navigate(link), 1500); // 過場動畫時間
+    setTimeout(() => navigate(link), 1500);
   };
 
   // ------------------- 滾動到指定 section -------------------
@@ -70,10 +69,12 @@ export default function Home() {
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
+
     const onScroll = () => {
       const idx = Math.round(el.scrollLeft / window.innerWidth);
       setActiveIndex(idx);
     };
+
     el.addEventListener("scroll", onScroll);
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
@@ -113,9 +114,9 @@ export default function Home() {
       </div>
 
       {/* 固定底部滑動提示 */}
-      <div className="neon-text left-1/2 transform -translate-x-1/2">
-        <p>滑動探索 →</p>
-        <p>(點擊進入該宇宙)</p>
+      <div className="neon-text left-1/2 transform -translate-x-1/2 text-center absolute bottom-6 text-white">
+        <p className="text-sm md:text-base lg:text-xl">滑動探索 →</p>
+        <p className="text-xs md:text-sm lg:text-xl">(點擊進入該宇宙)</p>
       </div>
 
       {/* 過場動畫 */}
@@ -154,6 +155,7 @@ export default function Home() {
     </div>
   );
 }
+
 // ---------------------------- UniverseSection ----------------------------
 function UniverseSection({ section, isActive }) {
   const sliderRef = useRef(null);
@@ -194,11 +196,16 @@ function UniverseSection({ section, isActive }) {
     }
   }, [section]);
 
+  // ---------------- PAST ----------------
   if (section.type === "past") {
     const imgs = [...section.images, ...section.images];
     return (
       <div className="relative w-screen h-screen flex items-center justify-center bg-black overflow-hidden">
-        <div ref={sliderRef} className="absolute inset-0 flex" style={{ width: `${imgs.length * 100}vw` }}>
+        <div
+          ref={sliderRef}
+          className="absolute inset-0 flex"
+          style={{ width: `${imgs.length * 100}vw` }}
+        >
           {imgs.map((img, i) => (
             <div
               key={i}
@@ -207,20 +214,27 @@ function UniverseSection({ section, isActive }) {
             ></div>
           ))}
         </div>
+
         <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
         <div className="absolute inset-0 bg-[url('/grain.png')] opacity-20 mix-blend-overlay"></div>
+
         <div
           className={`relative z-10 text-center px-6 py-4 bg-black/30 backdrop-blur-md rounded-xl transition-transform duration-500 ease-out transform ${
             isActive ? "scale-100 opacity-100" : "scale-[1.02] opacity-70"
           }`}
         >
-          <h1 className="text-4xl font-bold mb-2 text-white">{section.title}</h1>
-          <p className="text-sm opacity-90 text-white">{section.description}</p>
+          <h1 className="text-2xl md:text-3xl lg:text-5xl mb-2 text-white text-outline">
+            {section.title}
+          </h1>
+          <p className="text-lg md:text-2xl lg:text-2xl opacity-90 text-white text-outline">
+            {section.description}
+          </p>
         </div>
       </div>
     );
   }
 
+  // ---------------- PRESENT ----------------
   if (section.type === "present") {
     return (
       <div className="relative w-screen h-screen flex items-center justify-center bg-gradient-to-br from-green-200 to-emerald-500 overflow-hidden">
@@ -229,37 +243,46 @@ function UniverseSection({ section, isActive }) {
             {section.images.map((img, i) => (
               <div
                 key={i}
-                className="w-40 h-40 bg-cover bg-center rounded-xl shadow-lg"
+                className="w-40 md:w-60 lg:w-80 h-40  md:h-60 lg:h-80 bg-cover bg-center rounded-xl shadow-lg"
                 style={{ backgroundImage: `url(${img})` }}
               ></div>
             ))}
           </div>
         </div>
+
         <div className="absolute inset-0 bg-black/30"></div>
+
         <div
           className={`relative z-10 text-center px-6 py-4 bg-white/20 backdrop-blur-md rounded-xl transition-transform duration-500 ease-out transform ${
             isActive ? "scale-100 opacity-100" : "scale-[1.02] opacity-70"
           }`}
         >
-          <h1 className="text-4xl font-bold mb-2 text-white">{section.title}</h1>
-          <p className="text-sm opacity-90 text-white">{section.description}</p>
+          <h1 className="text-2xl md:text-3xl lg:text-5xl mb-2 text-white text-outline">
+            {section.title}
+          </h1>
+          <p className="text-lg md:text-2xl lg:text-2xl opacity-90 text-white text-outline">
+            {section.description}
+          </p>
         </div>
       </div>
     );
   }
 
-  // 未來宇宙
+  // ---------------- FUTURE ----------------
   return (
-    <div className={`relative w-screen h-screen flex items-center justify-center bg-gradient-to-br ${section.color} overflow-hidden`}>
+    <div
+      className={`relative w-screen h-screen flex items-center justify-center bg-gradient-to-br ${section.color} overflow-hidden`}
+    >
       <div ref={sliderRef} className="absolute inset-0"></div>
       <div className="absolute inset-0 bg-black/40"></div>
+
       <div
         className={`relative z-10 text-center transition-transform duration-500 ease-out transform ${
           isActive ? "scale-100 opacity-100" : "scale-[1.02] opacity-70"
         }`}
       >
-        <h1 className="text-4xl mb-2">{section.title}</h1>
-        <p className="text-sm opacity-90">{section.description}</p>
+        <h1 className="text-2xl md:text-3xl lg:text-5xl mb-2 ">{section.title}</h1>
+        <p className="text-lg md:text-2xl lg:text-2xl opacity-90">{section.description}</p>
       </div>
     </div>
   );

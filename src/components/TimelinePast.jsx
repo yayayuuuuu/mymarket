@@ -21,9 +21,9 @@ export default function TimelinePast({ timelineData, scrollContainerRef }) {
           >
             <div className="absolute inset-0 bg-black/50 rounded-xl"></div>
             <div className="relative z-10 text-white">
-              <h2 className="text-pink-400 text-3xl font-bold">{item.year}</h2>
-              <h3 className="text-xl mt-1 font-semibold">{item.title}</h3>
-              <p className="text-sm mt-2 leading-relaxed" dangerouslySetInnerHTML={{ __html: item.desc }} />
+              <h2 className="text-pink-400 text-3xl font-black">{item.year}</h2>
+              <h3 className="text-2xl md:text-3xl lg:text-5xl mt-2 font-semibold text-outline">{item.title}</h3>
+              <p className="text-lg md:text-2xl lg:text-2xl mt-3 leading-relaxed text-outline" dangerouslySetInnerHTML={{ __html: item.desc }} />
             </div>
           </motion.div>
         ))}

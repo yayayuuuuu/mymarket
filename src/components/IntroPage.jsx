@@ -44,7 +44,7 @@ export default function IntroPage({ onEnter }) {
       </div>
 
       {/* 標題 */}
-      <div className="w-screen flex-1 flex items-center justify-center z-20">
+      <div className="w-screen flex-1 flex items-center justify-center z-20 text-outline">
         <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-widest drop-shadow-lg animate-dropInSmooth">
           <br />
           記憶錨點

@@ -1,6 +1,6 @@
 // pages/IntroPage.jsx
 import React, { useState } from "react";
-import marketBg from "/public/images/intro.jpg";
+import marketBg from "/public/images/intro.png";
 import TransitionOverlay from "../components/TransitionOverlay";
 
 export default function IntroPage({ onEnter }) {

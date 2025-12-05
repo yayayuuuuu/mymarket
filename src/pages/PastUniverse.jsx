@@ -10,11 +10,11 @@ export default function PastUniverse() {
   const scrollContainerRef = useRef(null);
 
   const timelineData = [
-    { year: "1932", title: "南門市場成立", desc: "南門市場於日治時期正式建立，成為台北城重要的民生補給據點，攤商以傳統手工交易方式為主，市場內充滿濃厚的庶民生活氣息。", img: "/images/line1932.jpg" },
-    { year: "1960", title: "市場改建與擴張", desc: "隨城市快速發展，市場迎來大規模改建，增加更多攤位與室內空間，並引入更多品項，成為居民每天必逛的生活中心。", img: "/images/line1960.jpg" },
+    { year: "1932", title: "南門市場成立", desc: "南門市場於日治時期正式建立，成為台北城重要的民生補給據點，攤商以傳統手工交易方式為主，市場內充滿濃厚的庶民生活氣息。", img: "/images/line1932.png" },
+    { year: "1960", title: "市場改建與擴張", desc: "隨城市快速發展，市場迎來大規模改建，增加更多攤位與室內空間，並引入更多品項，成為居民每天必逛的生活中心。", img: "/images/line1960.png" },
     { year: "1980", title: "傳統攤商黃金時期", desc: "八零年代的南門市場達到鼎盛，全台知名的南北貨、熟食與年菜都在此聚集，節慶時更可見滿滿排隊人龍。", img: "/images/line1980.png" },
-    { year: "2000", title: "世代交替", desc: "新舊文化開始碰撞，第二代與第三代攤商逐漸接手，市場開始出現更乾淨明亮的陳列方式，同時保留傳統風味。", img: "/images/line2000.jpg" },
-    { year: "2020", title: "市場搬遷與再生", desc: "因安全考量與都市更新，南門市場進行大搬遷，在新建築中重新出發，延續百年的味道與記憶。", img: "/images/line2020.jpg" },
+    { year: "2000", title: "世代交替", desc: "新舊文化開始碰撞，第二代與第三代攤商逐漸接手，市場開始出現更乾淨明亮的陳列方式，同時保留傳統風味。", img: "/images/line2000.png" },
+    { year: "2020", title: "市場搬遷與再生", desc: "因安全考量與都市更新，南門市場進行大搬遷，在新建築中重新出發，延續百年的味道與記憶。", img: "/images/line2020.png" },
   ];
 
   const handleBack = () => {

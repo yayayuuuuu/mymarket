@@ -41,7 +41,7 @@ export default function PastUniverse() {
     {/* Timeline 滿版水平滑動容器 */}
     <div
       ref={scrollContainerRef}
-      className="w-full h-screen relative overflow-x-auto flex justify-center items-center z-10"
+      className="w-full h-screen relative overflow-x-auto flex justify-center items-center z-10 overflow-y-hidden"
     >
       {/* ⬇ 在 timeline 父層內插入 DustParticles（不再用 fixed） */}
       <DustParticles className="absolute top-0 left-0 w-full h-full z-0" />

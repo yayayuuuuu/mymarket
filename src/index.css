@@ -34,6 +34,9 @@ body {
   min-height: 100vh;
   /* font-family: 'Noto Sans TC', 'ZCOOL QingKe HuangYou', sans-serif; */
 }
+body, html {
+  overflow-y: hidden;
+}
 
 /* h1 {
   font-size: 3.2em;

@@ -53,38 +53,19 @@ export default function IntroPage({ onEnter }) {
         </h1>
 
         {/* 說明文字：淡入上浮 */}
-        <div className="relative w-11/12 max-w-2xl mt-4 mb-10">
-  {/* 左上釘子 */}
-  <div
-    className="
-      absolute -top-3 -left-3
-      w-5 h-5
-      bg-pink-600
-      rounded-full
-      shadow-md
-      border-2 border-white
-    "
-  ></div>
-
-  <div
-    className="
-      w-full
-      p-6 rounded-2xl shadow-lg
-      text-gray-800 backdrop-blur-md animate-fadeInUp
-    "
-    style={{ backgroundColor: "rgba(255,255,255,0.85)" }}
-  >
-    <p className="text-sm md:text-xl leading-relaxed font-medium">
-      在這個網頁裡，你不是旁觀者。<br />
-      點擊開始，你的照片、你的筆跡、你的腳步<br />
-      都會留在南門市場的故事裡。<br /><br />
-      ＂滑動底片，看見過去＂<br />
-      ＂按下拍立得，留住現在＂<br />
-      ＂最後，用你的畫筆寫下未來＂
-    </p>
-  </div>
-</div>
-
+        <div
+          className="w-11/12 max-w-2xl mt-4 mb-10 p-6 rounded-2xl shadow-lg text-gray-800 backdrop-blur-md animate-fadeInUp"
+          style={{ backgroundColor: "rgba(255,255,255,0.85)" }}
+        >
+          <p className="text-sm md:text-xl leading-relaxed font-medium">
+            在這個網頁裡，你不是旁觀者。<br />
+            點擊開始，你的照片、你的筆跡、你的腳步<br />
+            都會留在南門市場的故事裡。<br /><br />
+            ＂滑動底片，看見過去＂<br />
+            ＂按下拍立得，留住現在＂<br />
+            "最後，用你的畫筆寫下未來"
+          </p>
+        </div>
 
         {/* 霓虹按鈕：延遲淡入上浮 */}
         <button

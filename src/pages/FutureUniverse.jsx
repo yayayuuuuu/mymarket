@@ -17,7 +17,7 @@ export default function FutureUniverse() {
   return (
     <div className="relative w-screen h-screen bg-gradient-to-b from-black via-purple-950 to-blue-950 overflow-hidden text-white">
 
-      {/* 🔙 返回按鈕 */}
+      {/* 🔙 返回按鈕（完全不動！） */}
       <button
         onClick={handleBack}
         className="fixed top-4 left-4 z-50 w-16 h-16 flex items-center justify-center
@@ -39,31 +39,42 @@ export default function FutureUniverse() {
         </svg>
       </button>
 
-      {/* ⭐ 整體內容容器：水平＋垂直置中 */}
-      <div className="w-full h-full flex flex-col items-center mt-20">
+      {/* ⭐ 主容器 */}
+      <div className="w-full h-full flex flex-col items-center mt-16 sm:mt-20 md:mt-24 lg:mt-28">
 
-        {/* 頁面標題（固定在上方） */}
-        <div className="w-full  text-white px-4 py-3 flex items-center justify-center  z-40">
-          <div className="flex flex-col gap-1 text-center">
-            <h1 className="text-4xl font-bold tracking-wider drop-shadow-lg">
+        {/* ⭐ 標題區（文字 RWD） */}
+        <div className="w-full text-white px-4 py-3 flex items-center justify-center z-40">
+          <div className="flex flex-col gap-2 text-center">
+
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-wider drop-shadow-lg">
               ✦ 未來錨點創造 ✦
             </h1>
-            <p className="text-sm text-gray-300">
+
+            <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-300 leading-relaxed">
               請留下屬於您的時空足跡，成為南門市場新的記憶錨點
             </p>
           </div>
         </div>
 
-        {/* ⭐ Canvas 區垂直置中：讓畫布區撐滿剩下高度 */}
-        <div className="flex-1 flex items-center justify-center w-full mt-2">
+        {/* ⭐ Canvas 區（保留原樣，僅加外距 RWD） */}
+        <div className="flex-1 flex items-center justify-center w-full mt-2 px-2 sm:px-4 md:px-6">
           <InfiniteCanvas devUID="omHiZN80K8PP9ukH248hz2YqKgX2" />
         </div>
 
-        {/* 底部固定按鈕 */}
+        {/* ⭐ 底部按鈕（加入 RWD，但不影響你的 class） */}
         <div className="absolute bottom-6 w-full flex justify-center z-50 mb-3">
-         <button onClick={() => navigate("/gallery")} className="neon-black-btn">
-   前往時空維度走廊
-</button>
+
+          <button
+            onClick={() => navigate("/gallery")}
+            className="
+              neon-black-btn         
+              text-sm sm:text-base md:text-lg        /* 字體 RWD */
+              px-4 sm:px-6 md:px-8 lg:px-10          /* 內距 RWD */
+              py-2 sm:py-3 md:py-3.5                 /* 高度 RWD */
+            "
+          >
+            前往時空維度走廊
+          </button>
 
         </div>
 
@@ -74,4 +85,6 @@ export default function FutureUniverse() {
     </div>
   );
 }
+
+
 

@@ -58,12 +58,18 @@ export default function PolaroidCamera({ labelText = "南門市場 記憶錨點"
     <div className="min-h-screen w-screen flex flex-col items-center justify-center p-6 bg-cover bg-center relative" style={{ backgroundImage: "url('/images/present3.jpg')" }}>
       <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
 
-      <div className="relative z-10 text-center mb-6">
-        <h2 className="text-2xl font-bold text-white">
-          南門市場的現在，就在眼前。<br />
-          拿起拍立得，擷取屬於你的瞬間！
-        </h2>
-      </div>
+     <div className="relative z-10 text-center mb-6">
+  <h2
+    className="
+      text-white text-outline font-bold leading-relaxed
+      text-lg sm:text-xl md:text-2xl lg:text-3xl
+    "
+  >
+    南門市場的現在，就在眼前。<br />
+    拿起拍立得，擷取屬於你的瞬間！
+  </h2>
+</div>
+
 
       {/* 拍立得框 */}
       <div
@@ -115,16 +121,32 @@ export default function PolaroidCamera({ labelText = "南門市場 記憶錨點"
 
       {showCountdown && <Countdown start={3} onComplete={() => { setShowCountdown(false); capture(); }} />}
 
-      <div className="flex gap-4 mt-6 z-10">
-        {!photoSrc ? (
-          <button onClick={() => setShowCountdown(true)} className="px-4 py-2 rounded-lg bg-gray-100">開始擷取固著影像</button>
-        ) : (
-          <>
-            <button onClick={() => setPhotoSrc(null)} className="px-4 py-2 rounded-lg bg-gray-100">重拍</button>
-            <button onClick={handleDownload} className="px-4 py-2 rounded-lg bg-gray-100">下載</button>
-          </>
-        )}
-      </div>
+      <div className="flex gap-4 mt-6 z-10 flex-wrap justify-center">
+  {!photoSrc ? (
+    <button
+      onClick={() => setShowCountdown(true)}
+      className="px-4 py-2 rounded-lg bg-gray-100 text-sm sm:text-base md:text-lg lg:text-xl"
+    >
+      開始擷取固著影像
+    </button>
+  ) : (
+    <>
+      <button
+        onClick={() => setPhotoSrc(null)}
+        className="px-4 py-2 rounded-lg bg-gray-100 text-sm sm:text-base md:text-lg lg:text-xl"
+      >
+        重拍
+      </button>
+      <button
+        onClick={handleDownload}
+        className="px-4 py-2 rounded-lg bg-gray-100 text-sm sm:text-base md:text-lg lg:text-xl"
+      >
+        下載
+      </button>
+    </>
+  )}
+</div>
+
 
       {/* 魔法提示 */}
       <MagicToast message="✨ 恭喜，時空固著程度+1！" visible={toastVisible} />

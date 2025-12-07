@@ -44,23 +44,39 @@ body, html {
 } */
 
 button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid transparent; /* 初始無邊框 */
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+
+  background-color: transparent; /* 完全透明背景 */
+  color: #080808; /* 文字顏色，可依主題調整 */
+  
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.25s, color 0.25s, box-shadow 0.25s;
+  
+  outline: none; /* 去掉瀏覽器預設黑框 */
+  box-shadow: none;
 }
+
 button:hover {
-  border-color: #646cff;
+  border-color: #646cff; /* 滑鼠經過顯示邊框 */
+  background-color: rgba(100, 108, 255, 0.1); /* 輕微底色提示 */
 }
-button:focus,
+
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid #646cff; /* 聚焦提示，保留鍵盤可訪問性 */
+  outline-offset: 2px;
 }
+
+
+
 
 @media (prefers-color-scheme: light) {
   :root {

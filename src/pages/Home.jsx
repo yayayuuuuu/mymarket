@@ -114,7 +114,7 @@ export default function Home() {
       </div>
 
       {/* 固定底部滑動提示 */}
-      <div className="neon-text left-1/2 transform -translate-x-1/2 text-center absolute bottom-6 text-white">
+      <div className="neon-text left-1/2 transform -translate-x-1/2 text-center absolute bottom-6 mb-10 text-white">
         <p className="text-sm md:text-base lg:text-xl">滑動探索 →</p>
         <p className="text-xs md:text-sm lg:text-xl">(點擊進入該宇宙)</p>
       </div>

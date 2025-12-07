@@ -7,18 +7,16 @@ export default function IntroPage({ onEnter }) {
   const [showTransition, setShowTransition] = useState(false);
 
   const handleClick = () => {
-    // 開始過場動畫
     setShowTransition(true);
 
-    // 過場動畫結束後觸發進入
     setTimeout(() => {
       setShowTransition(false);
       onEnter();
-    }, 2000); // 過場動畫時間 2 秒，可調整
+    }, 2000);
   };
 
   return (
-    <div className="relative w-full h-screen flex flex-col items-center justify-between text-center overflow-hidden">
+    <div className="relative w-screen min-h-screen flex items-center justify-center text-center overflow-hidden">
       {/* 背景照片 */}
       <div
         className="absolute inset-0 bg-cover bg-center z-0"
@@ -43,23 +41,60 @@ export default function IntroPage({ onEnter }) {
         ))}
       </div>
 
-      {/* 標題 */}
-      <div className="w-screen flex-1 flex items-center justify-center z-20 text-outline">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-widest drop-shadow-lg animate-dropInSmooth">
+      {/* ⭐ 中央內容區塊：水平垂直置中 */}
+      <div className="z-20 flex flex-col items-center justify-center mt-10">
+        
+        {/* 標題 */}
+        <h1 className="text-4xl md:text-7xl font-extrabold text-white tracking-widest drop-shadow-lg animate-dropInSmooth text-outline">
           <br />
           記憶錨點
           <br />
           南門市場固著計畫
         </h1>
-      </div>
 
-      {/* 霓虹按鈕 */}
-      <button
-        className="mb-40 px-8 py-3 text-white rounded-xl neon-button z-20 animate-fadeInOnly animate-floatY"
-        onClick={handleClick}
-      >
-        點擊開始！
-      </button>
+        {/* 說明文字：淡入上浮 */}
+        <div className="relative w-11/12 max-w-2xl mt-4 mb-10">
+  {/* 左上釘子 */}
+  <div
+    className="
+      absolute -top-3 -left-3
+      w-5 h-5
+      bg-pink-600
+      rounded-full
+      shadow-md
+      border-2 border-white
+    "
+  ></div>
+
+  <div
+    className="
+      w-full
+      p-6 rounded-2xl shadow-lg
+      text-gray-800 backdrop-blur-md animate-fadeInUp
+    "
+    style={{ backgroundColor: "rgba(255,255,255,0.85)" }}
+  >
+    <p className="text-sm md:text-xl leading-relaxed font-medium">
+      在這個網頁裡，你不是旁觀者。<br />
+      點擊開始，你的照片、你的筆跡、你的腳步<br />
+      都會留在南門市場的故事裡。<br /><br />
+      ＂滑動底片，看見過去＂<br />
+      ＂按下拍立得，留住現在＂<br />
+      ＂最後，用你的畫筆寫下未來＂
+    </p>
+  </div>
+</div>
+
+
+        {/* 霓虹按鈕：延遲淡入上浮 */}
+        <button
+          className="px-8 py-3 text-white rounded-xl neon-button animate-fadeInUpDelay mt-20"
+          onClick={handleClick}
+        >
+          點擊開始！
+        </button>
+
+      </div>
 
       {/* 過場動畫覆蓋 */}
       <TransitionOverlay visible={showTransition} />
@@ -72,6 +107,43 @@ export default function IntroPage({ onEnter }) {
         }
         .animate-twinkle { animation: twinkle ease-in-out infinite; }
 
+        /* 標題下落動畫 */
+        @keyframes dropInSmooth {
+          0% {
+            opacity: 0;
+            transform: translateY(-40px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-dropInSmooth {
+          animation: dropInSmooth 1.2s ease-out forwards;
+        }
+
+        /* 說明文字浮現 */
+        @keyframes fadeInUp {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fadeInUp {
+          animation: fadeInUp 1.2s ease-out forwards;
+        }
+
+        /* 按鈕延遲浮現 */
+        .animate-fadeInUpDelay {
+          animation: fadeInUp 1.2s ease-out forwards;
+          animation-delay: 0.3s;
+        }
+
+        /* 霓虹按鈕閃爍 */
         @keyframes neonButtonTwinkle {
           0%,100% {
             text-shadow:0 0 5px #0ff,0 0 10px #0ff,0 0 20px #0ff,0 0 40px #0ff;
@@ -95,14 +167,10 @@ export default function IntroPage({ onEnter }) {
           background-color: rgba(0,255,255,0.1);
           transform: scale(1.05);
         }
-
-        @keyframes slideDown {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(100%); }
-        }
       `}</style>
     </div>
   );
 }
+
 
 

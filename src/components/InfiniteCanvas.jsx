@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import { db } from "../firebase/firebaseConfig";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";   // ★ 新增
+import { useNavigate } from "react-router-dom";
 
 export default function InfiniteCanvasMobile() {
-  const navigate = useNavigate();   // ★ 新增
+  const navigate = useNavigate();
 
   const CANVAS_W = 300;
   const CANVAS_H = 300;
@@ -23,6 +23,7 @@ export default function InfiniteCanvasMobile() {
   const lastDistance = useRef(null);
   const currentLineRef = useRef(null);
 
+  // Canvas 初始化
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -49,12 +50,13 @@ export default function InfiniteCanvasMobile() {
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
 
-    const x = (clientX - rect.left - offset.x) / zoom;
-    const y = (clientY - rect.top - offset.y) / zoom;
-
-    return { x, y };
+    return {
+      x: (clientX - rect.left - offset.x) / zoom,
+      y: (clientY - rect.top - offset.y) / zoom,
+    };
   };
 
+  /* ======= PointerDown ======= */
   const handlePointerDown = (e) => {
     canvasRef.current.setPointerCapture(e.pointerId);
     pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
@@ -78,12 +80,14 @@ export default function InfiniteCanvasMobile() {
     }
   };
 
+  /* ======= PointerMove ======= */
   const handlePointerMove = (e) => {
     if (!pointers.current.has(e.pointerId)) return;
 
     pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
     const pts = [...pointers.current.values()];
 
+    // 雙指：移動 + 縮放
     if (pts.length === 2) {
       const [p1, p2] = pts;
 
@@ -108,6 +112,7 @@ export default function InfiniteCanvasMobile() {
       return;
     }
 
+    // 單指：畫畫
     if (pts.length === 1 && currentLineRef.current) {
       const pos = getCanvasPos(e.clientX, e.clientY);
       const arr = currentLineRef.current.points;
@@ -141,12 +146,13 @@ export default function InfiniteCanvasMobile() {
     currentLineRef.current = null;
   };
 
+  /* ======= 清空畫布 ======= */
   const clearCanvas = () => {
     const ctx = ctxRef.current;
     ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
   };
 
-  /** ★★★ 加入 navigate("/gallery") 的上傳功能 ★★★ */
+  /* ======= 上傳功能 ======= */
   const uploadWhiteboard = async () => {
     const canvas = canvasRef.current;
     const dataURL = canvas.toDataURL("image/png");
@@ -158,93 +164,100 @@ export default function InfiniteCanvasMobile() {
       });
 
       alert("📤 已上傳到 Firestore！");
-      navigate("/gallery");    // ←←← 自動跳轉展示牆
+      navigate("/gallery");
     } catch (err) {
       console.error("上傳錯誤:", err);
       alert("❌ 上傳失敗！");
     }
   };
 
- return (
-  <div className="relative w-full h-screen bg-black/5 overflow-hidden touch-none select-none p-4">
+  return (
+    <div className="relative w-full h-screen bg-black/5 overflow-hidden touch-none select-none p-4">
 
-    {/* 工具列 */}
-    <div className="flex flex-wrap gap-2 mb-4 md:justify-center">
-      <button
-        onClick={() => setTool("pen")}
-        className={`neon-btn ${tool === "pen" ? "active" : ""}`}
-      >
-        ✏️ 筆刷
-      </button>
+      {/* ====== 工具列（RWD 改好） ====== */}
+      <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 mb-4 justify-center">
 
-      <button
-        onClick={() => setTool("eraser")}
-        className={`neon-btn ${tool === "eraser" ? "active" : ""}`}
-      >
-        🧽 橡皮擦
-      </button>
+        <button
+          onClick={() => setTool("pen")}
+          className={`neon-btn text-sm sm:text-base px-4 py-2 sm:px-6 sm:py-3 ${
+            tool === "pen" ? "active" : ""
+          }`}
+        >
+          ✏️ 筆刷
+        </button>
 
-      <input
-        type="color"
-        className="color-picker"
-        value={color}
-        onChange={(e) => setColor(e.target.value)}
-      />
+        <button
+          onClick={() => setTool("eraser")}
+          className={`neon-btn text-sm sm:text-base px-4 py-2 sm:px-6 sm:py-3 ${
+            tool === "eraser" ? "active" : ""
+          }`}
+        >
+          🧽 橡皮擦
+        </button>
 
-      <input
-        type="range"
-        min="1"
-        max="30"
-        value={lineWidth}
-        onChange={(e) => setLineWidth(Number(e.target.value))}
-        className="w-28"
-      />
+        <input
+          type="color"
+          className="color-picker w-10 h-10 sm:w-12 sm:h-12"
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
+        />
+
+        <input
+          type="range"
+          min="1"
+          max="30"
+          value={lineWidth}
+          onChange={(e) => setLineWidth(Number(e.target.value))}
+          className="w-28 sm:w-36"
+        />
+      </div>
+
+      {/* ====== 畫布置中 ====== */}
+      <div className="w-full flex justify-center items-center overflow-hidden">
+        <canvas
+          ref={canvasRef}
+          style={{
+            background: "white",
+            border: "1px solid #ccc",
+            touchAction: "none",
+            ...canvasStyleTransform,
+          }}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          onContextMenu={(e) => e.preventDefault()}
+        />
+      </div>
+
+      {/* ====== 下方按鈕（RWD 完整版） ====== */}
+      <div className="mt-4 w-full flex flex-col items-center">
+
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6">
+          <button
+            className="neon-btn neon-red text-sm sm:text-base px-4 py-2 sm:px-6 sm:py-3"
+            onClick={clearCanvas}
+          >
+            🗑 清空
+          </button>
+
+          <button
+            className="neon-btn neon-green text-sm sm:text-base px-4 py-2 sm:px-6 sm:py-3"
+            onClick={uploadWhiteboard}
+          >
+            📤 上傳
+          </button>
+        </div>
+
+        <p className="mt-3 text-center text-sm text-gray-600">
+          ✨ 畫完記得按下「上傳」喔！
+        </p>
+      </div>
+
     </div>
-
-    {/* 畫布置中單獨一行 */}
-    <div className="w-full flex justify-center items-center overflow-hidden">
-      <canvas
-        ref={canvasRef}
-        style={{
-          background: "white",
-          border: "1px solid #ccc",
-          touchAction: "none",
-          ...canvasStyleTransform,
-        }}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerUp}
-        onContextMenu={(e) => e.preventDefault()}
-      />
-    </div>
-
-    {/* 按鈕放在畫布下面 */}
-   {/* 按鈕放在畫布下面 */}
-<div className="mt-4 w-full flex flex-col items-center">
-
-  {/* 按鈕 Row */}
-  <div className="flex gap-4">
-    <button className="neon-btn neon-red" onClick={clearCanvas}>
-      🗑 清空
-    </button>
-
-    <button className="neon-btn neon-green" onClick={uploadWhiteboard}>
-      📤 上傳
-    </button>
-  </div>
-
-  {/* 提示文字（一定在按鈕下方） */}
-  <p className="mt-3 text-center text-sm text-gray-600">
-    ✨ 畫完記得按下「上傳」喔！
-  </p>
-</div>
-
-
-  </div>
-);
-
+  );
 }
+
 
 
 

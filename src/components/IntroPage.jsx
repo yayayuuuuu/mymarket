@@ -58,7 +58,7 @@ export default function IntroPage({ onEnter }) {
           style={{ backgroundColor: "rgba(255,255,255,0.85)" }}
         >
           <p className="text-sm md:text-lg leading-relaxed font-medium">
-            在這個網頁裡，你不是旁觀者。<br />
+            在此次行動裡，你不是旁觀者。<br />
             點擊開始，你的照片、你的筆跡、你的腳步<br />
             都會留在南門市場的故事裡。<br /><br />
             ＂滑動底片，看見過去＂<br />
